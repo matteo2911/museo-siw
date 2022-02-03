@@ -5,7 +5,7 @@
 <body>
 	<nav><p class="titolo">INTERNATIONAL MUSEUM</p></nav>
 	<div>
-    	<h4 class="titolo">I nostri artisti</h4>
+    	<h4 class="titolo" th:text="'i nostri artisti ' + ${numartisti}"></h4>
 		<ul style="margin-right: 2%;">
 			<li style="margin-top: 25px;" th:each="artista : ${artisti}">
 				<a href="artista.html" 

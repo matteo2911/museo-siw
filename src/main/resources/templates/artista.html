@@ -36,7 +36,12 @@
 		</div>
 	</div>
 	<div><a href="/default"><button class="sub-button"
-				style="margin-top: 19px;">Home</button></a></div>
+				style="margin-top: 19px;">Home</button></a>
+			
+		<form th:action ="@{'/admin/eliminaArtista' + ${artista.id} method="POST" th:object="${artista}">	
+		         <button cless="sub-button">ELIMINA</button>
+		</form>
+	</div>
 
 </body>
 

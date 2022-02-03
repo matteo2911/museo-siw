@@ -9,33 +9,34 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import it.uniroma3.siw.spring.model.Collezione;
-import it.uniroma3.siw.spring.service.CollezioneService;
+import it.uniroma3.siw.spring.model.Meccanico;
+import it.uniroma3.siw.spring.service.MeccanicoService;
 
 
 @Component
-public class CollezioneValidator implements Validator {
+public class MeccanicoValidator implements Validator {
 	@Autowired
-	private CollezioneService collezioneService;
+	private MeccanicoService meccanicoService;
 	
-    private static final Logger logger = LoggerFactory.getLogger(CollezioneValidator.class);
+    private static final Logger logger = LoggerFactory.getLogger(MeccanicoValidator.class);
 
 	@Override
-	public void validate(Object o, Errors errors) {
+	public void validate(Object m, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cognome", "required");
 
 		if (!errors.hasErrors()) {
 			logger.debug("confermato: valori non nulli");
-			if (this.collezioneService.alreadyExists((Collezione)o)) {
+			if (this.meccanicoService.alreadyExists((Meccanico)m)) {
 				logger.debug("e' un duplicato");
 				errors.reject("duplicato");
 			}
+		
 		}
 	}
 
 	@Override
 	public boolean supports(Class<?> aClass) {
-		return Collezione.class.equals(aClass);
+		return Meccanico.class.equals(aClass);
 	}
 }
